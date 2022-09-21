@@ -62,9 +62,9 @@
             if (a.make < b.make) sortResult =  -1
             if (a.make > b.make) sortResult= 1
             sortResult *= sortOrderMake
-            sortOrderMake *= -1
             return sortResult
         })
+        sortOrderMake *= -1
         makeTableRows(sortedCars)
     }
 
