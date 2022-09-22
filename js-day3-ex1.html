@@ -1,11 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Day3, ex1</title>
+  <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <title>Day3, ex1</title>
 </head>
-<body>
-<h2>Day 3, Exercise 1</h2>
-<h3>Not yet implemented</h3>
+
+<body style="font-family: sans-serif">
+  <div style="margin-left:10%;width:78%;margin-right:auto ;">
+    <h2>Day 3, Exercise 1</h2>
+    <h3>First fetch (GET only) demo</h3>
+    <input id="input-id" type="text" placeholder="Enter id" />&nbsp
+    <button id="btn-get-user">Get user</button>
+    <button id="btn-get-all">Get all</button>
+
+    <div id="all-user-content" style="display: none;">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+
+    <div id="single-user-content" style="display:none;">
+      <h3>Details</h3>
+      <p id="p-name"></p>
+      <p id="p-email"></p>
+      <p id="p-error" style="color:red"></p>
+    </div>
+  </div>
+
+  <script>
+    const URL = "https://jsonplaceholder.typicode.com/users/"
+    document.getElementById("btn-get-user").onclick = getUser;
+    document.getElementById("btn-get-all").onclick = getAll;
+
+    function getUser() {
+      document.getElementById("p-error").innerText = ""
+      const id = document.getElementById("input-id").value
+      document.getElementById("all-user-content").style.display = "none"
+      document.getElementById("single-user-content").style.display = "block"
+      if (!id) {
+        document.getElementById("p-error").innerText = "Please provide an id"
+        return
+      }
+      fetch(URL + id)
+        .then(res => {
+          if (!res.ok) {
+            return Promise.reject("Could not find user")
+          }
+          return res.json()
+        })
+        .then(user => {
+          const content = document.getElementById("single-user-content")
+          document.getElementById("p-name").innerText = user.name
+          document.getElementById("p-email").innerText = user.email
+        })
+        .catch(e => {
+          console.log("Error", e)
+          const node = document.getElementById("p-error")
+          node.innerText = e
+        })
+    }
+
+    function getAll() {
+      fetch(URL)
+        .then(res => res.json()) //No error handling
+        .then(users => {
+          const rows = users.map(u => `
+          <tr>
+            <td>${u.name}</td>
+            <td>${u.phone}</td>
+          </tr>
+          `).join("")
+          document.getElementById("single-user-content").style = "none"
+          document.getElementById("all-user-content").style = "block"
+          
+          document.getElementById("tbody").innerHTML = rows
+        })
+    }
+
+  </script>
 </body>
+
 </html>
