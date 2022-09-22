@@ -70,6 +70,7 @@
     }
 
     function getAll() {
+      document.getElementById("single-user-content").style.display = "none"
       fetch(URL)
         .then(res => res.json()) //No error handling
         .then(users => {
@@ -79,9 +80,8 @@
             <td>${u.phone}</td>
           </tr>
           `).join("")
-          document.getElementById("single-user-content").style = "none"
-          document.getElementById("all-user-content").style = "block"
           
+          document.getElementById("all-user-content").style = "block"
           document.getElementById("tbody").innerHTML = rows
         })
     }
