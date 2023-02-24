@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Ex 2</title>
@@ -14,26 +15,32 @@
 </head>
 
 <body>
-<div id="outer">
-    <div id="id-1" class="my-div"></div>
-    <div id="id-2" class="my-div"></div>
-    <div id="id-3" class="my-div"></div>
-    <div id="id-4" class="my-div"></div>
-    <div id="id-5" class="my-div"></div>
-    <div id="id-6" class="my-div"></div>
-    <div id="id-7" class="my-div"></div>
-    <div id="id-8" class="my-div"></div>
-    <div id="id-9" class="my-div"></div>
-    <div id="id-10" class="my-div"></div>
-</div>
-<p id="p-text"></p>
-<script>
-    document.getElementById("outer").onclick = (evt) => {
-        const id = evt.target.id;
-        console.log("Hi from div number: " + id)
-        document.getElementById("p-text").innerText = id;
+    <h2>Click a box to see its ID </h2>
+    <p>Make sure in your solution to attach the click handler ONE place ONLY (use event bubling)</p>
+    <div id="outer">
+        <div id="id-1" class="my-div"></div>
+        <div id="id-2" class="my-div"></div>
+        <div id="id-3" class="my-div"></div>
+        <div id="id-4" class="my-div"></div>
+        <div id="id-5" class="my-div"></div>
+        <div id="id-6" class="my-div"></div>
+        <div id="id-7" class="my-div"></div>
+        <div id="id-8" class="my-div"></div>
+        <div id="id-9" class="my-div"></div>
+        <div id="id-10" class="my-div"></div>
+    </div>
+    <p id="p-text"></p>
+    <div style="margin-top: 1em;">
+        <a href="/">back</a>
+    </div>
+    <script>
+        document.getElementById("outer").onclick = (evt) => {
+            const id = evt.target.id;
+            console.log("Hi from div number: " + id)
+            document.getElementById("p-text").innerText = id;
 
-    }
-</script>
+        }
+    </script>
 </body>
+
 </html>
